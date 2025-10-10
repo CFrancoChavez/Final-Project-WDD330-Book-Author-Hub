@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: './', 
+  base: '/Final-Project-WDD330-Book-Author-Hub/', 
   root: 'src',
   build: {
     outDir: '../dist',
