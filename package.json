@@ -1,11 +1,10 @@
 {
   "name": "book-author-hub",
   "version": "1.0.0",
-  
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "vite",
     "dev": "vite",
     "build": "vite build --emptyOutDir",
     "preview": "vite preview",
