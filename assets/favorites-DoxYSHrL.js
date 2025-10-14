@@ -1,0 +1,8 @@
+import"./style-gLCKlo5M.js";import"./navToggle-BDjXESUz.js";const o=document.getElementById("favorites-list"),a=document.getElementById("download-txt"),l=document.getElementById("download-json"),s=JSON.parse(localStorage.getItem("favorites"))||[];function d(){if(o){if(!s.length){o.innerHTML=`
+      <p class="no-results">No favorites yet. Go back and add some!</p>
+    `,a&&(a.style.display="none"),l&&(l.style.display="none");return}o.innerHTML="",s.forEach(e=>{const t=document.createElement("div");t.classList.add("favorite-card"),t.innerHTML=`
+      <h3 class="fav-title">${e.title}</h3>
+      <p class="fav-author">${e.author||"Unknown Author"}</p>
+      ${e.isbn?`<small class="fav-isbn">ISBN: ${e.isbn}</small>`:""}
+    `,o.appendChild(t)})}}a&&a.addEventListener("click",()=>{const e=s.map(i=>`${i.title} — ${i.author||"Unknown"}${i.isbn?` (ISBN: ${i.isbn})`:""}`).join(`
+`),t=new Blob([e],{type:"text/plain"}),n=URL.createObjectURL(t),c=document.createElement("a");c.href=n,c.download="favorites.txt",c.click(),URL.revokeObjectURL(n)});l&&l.addEventListener("click",()=>{const e=new Blob([JSON.stringify(s,null,2)],{type:"application/json"}),t=URL.createObjectURL(e),n=document.createElement("a");n.href=t,n.download="favorites.json",n.click(),URL.revokeObjectURL(t)});const r=document.createElement("button");r.textContent="🗑️ Clear Favorites";r.classList.add("clear-favs-btn");r.addEventListener("click",()=>{confirm("Are you sure you want to delete all favorites?")&&(localStorage.removeItem("favorites"),o.innerHTML="<p>All favorites cleared.</p>",s.length=0,a.style.display="none",l.style.display="none",r.style.display="none")});document.querySelector("main").prepend(r);d();
