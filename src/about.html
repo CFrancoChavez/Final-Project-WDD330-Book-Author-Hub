@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About | Book & Author Hub</title>
-    <link rel="stylesheet" href="./css/style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>📚 Book & Author Hub</h1>
-      <nav id="nav">
-        <a href="index.html">Home</a>
-        <a href="favorites.html">Favorites</a>
-        <a href="about.html" class="active">About</a>
-      </nav>
-      <button id="menu-toggle" aria-label="Menu">☰</button>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Book & Author Hub</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>📚 Book & Author Hub</h1>
+    <button id="menu-toggle" aria-label="Toggle menu">☰</button>
+    <nav id="nav-menu" class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
 
-    <main>
+  <main>
+    <section>
       <h2>About This Project</h2>
       <p>
         <strong>Book & Author Hub</strong> is a web app built as a final project for WDD 330.
-        It allows users to search books using the <em>Open Library API</em> and fetch detailed
-        data and cover images from the <em>Google Books API</em>.
+        It allows users to search books using the <em>Open Library API</em> and fetch
+        detailed data and cover images from the <em>Google Books API</em>.
       </p>
       <p>
-        You can view book details, mark favorites, copy them to your clipboard, and
-        download your favorite list as text or JSON files.
+        You can view book details, mark favorites, copy them to your clipboard,
+        and download your favorite list as text or JSON files.
       </p>
+
       <h3>Developed by:</h3>
       <p><strong>Franco Chávez</strong> — Junior Full Stack Developer (Córdoba, Argentina)</p>
-    </main>
+    </section>
+  </main>
 
-    <script type="module" src="./js/app.js"></script>
-  </body>
+  <footer>
+    <p>© 2025 Book & Author Hub - WDD 330</p>
+  </footer>
+
+  <script type="module" src="./js/app.js"></script>
+  <script type="module" src="./js/navToggle.js"></script>
+
+</body>
 </html>

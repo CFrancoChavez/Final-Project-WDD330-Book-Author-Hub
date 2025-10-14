@@ -2,56 +2,83 @@ const listContainer = document.getElementById('favorites-list');
 const downloadTxt = document.getElementById('download-txt');
 const downloadJson = document.getElementById('download-json');
 
+// Cargar favoritos desde localStorage o inicializar vacío
 const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
+// Renderiza la lista de favoritos
 function renderFavorites() {
+  if (!listContainer) return; // seguridad
+
   if (!favorites.length) {
-    listContainer.innerHTML = '<p>No favorites yet. Go back and add some!</p>';
-    downloadTxt.style.display = 'none';
-    downloadJson.style.display = 'none';
+    listContainer.innerHTML = `
+      <p class="no-results">No favorites yet. Go back and add some!</p>
+    `;
+    if (downloadTxt) downloadTxt.style.display = 'none';
+    if (downloadJson) downloadJson.style.display = 'none';
     return;
   }
 
-  listContainer.innerHTML = `
-    <ul class="favorites-ul">
-      ${favorites
-        .map(
-          (f) => `
-        <li>
-          <strong>${f.title}</strong><br>
-          <em>${f.author}</em><br>
-          <small>ISBN: ${f.isbn}</small>
-        </li>
-      `
-        )
-        .join('')}
-    </ul>
-  `;
+  const grid = document.createElement('div');
+  grid.classList.add('results-grid');
+
+  favorites.forEach((f) => {
+    const card = document.createElement('div');
+    card.classList.add('book-card');
+    card.innerHTML = `
+      <h3>${f.title}</h3>
+      <p>${f.author || 'Unknown Author'}</p>
+      ${f.isbn ? `<small class="small-muted">ISBN: ${f.isbn}</small>` : ''}
+    `;
+    grid.appendChild(card);
+  });
+
+  listContainer.innerHTML = '';
+  listContainer.appendChild(grid);
 }
 
 // Descarga TXT
-downloadTxt.addEventListener('click', () => {
-  const blob = new Blob(
-    [favorites.map(f => `${f.title} — ${f.author} (ISBN: ${f.isbn})`).join('\n')],
-    { type: 'text/plain' }
-  );
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'favorites.txt';
-  a.click();
-  URL.revokeObjectURL(url);
-});
+if (downloadTxt) {
+  downloadTxt.addEventListener('click', () => {
+    const content = favorites
+      .map((f) => `${f.title} — ${f.author || 'Unknown'}${f.isbn ? ` (ISBN: ${f.isbn})` : ''}`)
+      .join('\n');
+
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'favorites.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
 
 // Descarga JSON
-downloadJson.addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(favorites, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'favorites.json';
-  a.click();
-  URL.revokeObjectURL(url);
+if (downloadJson) {
+  downloadJson.addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(favorites, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'favorites.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+// Botón para limpiar favoritos
+const clearBtn = document.createElement('button');
+clearBtn.textContent = '🗑️ Clear Favorites';
+clearBtn.classList.add('clear-favs-btn');
+clearBtn.addEventListener('click', () => {
+  if (confirm('Are you sure you want to delete all favorites?')) {
+    localStorage.removeItem('favorites');
+    listContainer.innerHTML = '<p>All favorites cleared.</p>';
+    downloadTxt.style.display = 'none';
+    downloadJson.style.display = 'none';
+    clearBtn.style.display = 'none';
+  }
 });
+document.querySelector('main').prepend(clearBtn);
 
+// Render inicial
 renderFavorites();

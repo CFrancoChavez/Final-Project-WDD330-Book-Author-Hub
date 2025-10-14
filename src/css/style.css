@@ -30,19 +30,6 @@ body {
   min-height: 100vh;
 }
 
-/* Utility */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* ---------- HEADER ---------- */
 header {
   background-color: var(--color-primary);
@@ -56,39 +43,33 @@ header {
   box-shadow: 0 1px 0 rgba(0,0,0,0.04);
 }
 
-header .brand {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
 header h1 {
   font-size: 1.25rem;
   margin: 0;
   color: white;
 }
 
-header .nav-menu {
+.nav-menu {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
-header .nav-menu a {
+.nav-menu a {
   color: var(--color-accent);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.15s ease;
 }
 
-header .nav-menu a:hover,
-header .nav-menu a:focus {
+.nav-menu a:hover,
+.nav-menu a:focus {
   color: #fff;
   outline: none;
   text-decoration: underline;
 }
 
-/* Menu toggle (hamburger) */
+/* Menu toggle */
 #menu-toggle {
   display: none;
   font-size: 1.6rem;
@@ -152,47 +133,7 @@ button:focus {
   outline: none;
 }
 
-/* Primary small actions */
-.details-btn {
-  background: transparent;
-  border: 1px solid var(--color-primary);
-  color: var(--color-primary);
-  padding: 0.5rem 0.7rem;
-  border-radius: 6px;
-  font-weight: 600;
-}
-
-.details-btn:hover,
-.details-btn:focus {
-  background: var(--color-primary);
-  color: white;
-}
-
-.fav-btn {
-  background-color: var(--color-primary);
-  color: white;
-  padding: 0.5rem 0.7rem;
-  border-radius: 6px;
-  border: 1px solid rgba(0,0,0,0.06);
-}
-
-.fav-btn:hover,
-.fav-btn:focus {
-  background-color: var(--color-accent);
-  color: black;
-}
-
-button[disabled] {
-  opacity: 0.7;
-  cursor: default;
-  transform: none;
-}
-
-/* ---------- RESULTS GRID ---------- */
-#results {
-  margin-top: 0.5rem;
-}
-
+/* Book grid */
 .results-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -216,6 +157,17 @@ button[disabled] {
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   transform: translateY(-6px);
 }
+.card-actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column; /* apila los botones verticalmente */
+  gap: 0.5rem; /* espacio entre View Details y Favorite */
+  align-items: stretch; /* ambos botones ocuparán el mismo ancho */
+}
+
+.card-actions button {
+  width: 100%;
+}
 
 .book-cover {
   width: 100px;
@@ -224,58 +176,6 @@ button[disabled] {
   margin-bottom: 0.5rem;
   border-radius: 4px;
   background: #f7f7f7;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.02) inset;
-}
-
-.book-card h3 {
-  font-size: 1rem;
-  margin: 0.4rem 0 0.2rem 0;
-  line-height: 1.2;
-}
-
-.book-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-/* Card actions row */
-.card-actions {
-  margin-top: auto;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-/* ---------- STATES ---------- */
-.loading {
-  text-align: center;
-  font-style: italic;
-  color: var(--muted);
-}
-
-.loading::after {
-  content: ' ⏳';
-  display: inline-block;
-  margin-left: 6px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0); }
-  to { transform: rotate(360deg); }
-}
-
-.no-results {
-  text-align: center;
-  color: var(--muted);
-  padding: 1.5rem;
-}
-
-/* Errors */
-.error {
-  color: #c0392b;
-  text-align: center;
 }
 
 /* ---------- MODAL DETAIL VIEW ---------- */
@@ -314,105 +214,31 @@ button[disabled] {
   to { transform: scale(1); opacity: 1; }
 }
 
-.close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: var(--color-primary);
-  cursor: pointer;
-  background: none;
-  border: none;
-}
-
-.detail-cover {
-  width: 160px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 6px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
-.modal-content h2 {
-  margin: 0;
-  color: var(--color-primary);
-  font-size: 1.15rem;
-}
-
-.modal-content .meta {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-bottom: 0.6rem;
-}
-
-.modal-content .desc {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  text-align: left;
-}
-
 /* ---------- FOOTER ---------- */
 footer {
   padding: 1rem;
   text-align: center;
-  background: transparent;
   color: var(--muted);
   font-size: 0.9rem;
   margin-top: 2rem;
-  animation: footerFade 0.6s ease;
 }
 
-@keyframes footerFade {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-#menu-toggle {
-  display: none;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  color: white;
-}
 /* ---------- RESPONSIVE ---------- */
-@media (max-width: 900px) {
-  main {
-    padding: 1.25rem;
-  }
-
-  .modal-content {
-    grid-template-columns: 1fr;
-    max-width: 520px;
-  }
-
-  .detail-cover {
-    width: 140px;
-    height: 200px;
-    margin: 0 auto;
-  }
-}
-
 @media (max-width: 768px) {
-  /* Adjust search input full width on small screens */
   input[type="text"] {
     width: 100%;
-  }
-
-  .results-grid {
-    gap: 0.75rem;
   }
 
   .book-card {
     min-height: 220px;
   }
 
-  /* Header: mobile menu */
   #menu-toggle {
     display: block;
   }
 
   .nav-menu {
-    display: none; /* hidden by default on mobile */
+    display: none;
     flex-direction: column;
     position: absolute;
     background: var(--color-primary);
@@ -435,25 +261,56 @@ footer {
   }
 }
 
-@media (max-width: 420px) {
-  .book-cover {
-    width: 90px;
-    height: 135px;
+/* vuelve a modo escritorio */
+@media (min-width: 769px) {
+  .nav-menu {
+    display: flex !important;
+    position: static;
+    background: none;
+    box-shadow: none;
+    flex-direction: row;
+    padding: 0;
   }
 
-  .modal-content {
-    padding: 1rem;
+  #menu-toggle {
+    display: none;
   }
 }
-
-/* ---------- ACCESSIBILITY (focus) ---------- */
-a:focus, button:focus, input:focus {
-  outline: 3px solid rgba(25,42,86,0.12);
-  outline-offset: 2px;
+/* --- Fix: Long modal content scroll --- */
+.modal {
+  overflow-y: auto; /* si el contenido total es muy alto */
 }
 
-/* small helper for disabled */
-.small-muted {
-  font-size: 0.85rem;
-  color: var(--muted);
+.modal-content {
+  max-height: 85vh; /* el modal nunca ocupará más del 85% del alto de la ventana */
+  overflow-y: auto; /* permite scroll interno solo dentro del modal */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--color-primary) #f0f0f0;
+}
+
+/* Scrollbar estilo (para Chrome/Edge) */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 10px;
+}
+.clear-favs-btn {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+.clear-favs-btn:hover {
+  background-color: #e74c3c;
 }
