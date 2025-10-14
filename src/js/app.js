@@ -39,10 +39,13 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  resultsContainer.innerHTML = `<p class="loading">Searching...</p>`;
+  resultsContainer.innerHTML = `<p class="loading">Searching <span class="spinner"></span></p>`;
+
 
   try {
+    // Delay intencional corto para que la animación sea perceptible
     const books = await searchBooks(query);
+    await new Promise((resolve) => setTimeout(resolve, 400)); // 🔹 0.4s visual buffer
     renderResults(books);
   } catch (err) {
     console.error(err);
