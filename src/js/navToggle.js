@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.getElementById('nav-menu');
   if (!menuToggle || !navMenu) return;
 
+  // Toggle menu visibility
   menuToggle.addEventListener('click', () => {
     navMenu.classList.toggle('open');
   });

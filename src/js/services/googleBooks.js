@@ -1,5 +1,9 @@
-// API secundaria para obtener detalles de autor y portada de alta resolución
-
+/**
+ * Fetches detailed book information from the Google Books API.
+ * This includes richer metadata such as high-resolution cover images,
+ * full descriptions, and publication dates.
+ *
+*/
 export async function getBookDetails(title, author) {
   const query = encodeURIComponent(`${title} ${author}`);
   const url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;

@@ -1,3 +1,5 @@
+// Fetches book data from the Open Library API
+// Uses query parameter to search by title, author, or keyword
 export async function searchBooks(query) {
   const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`;
   try {
