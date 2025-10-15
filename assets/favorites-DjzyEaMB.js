@@ -1,4 +1,4 @@
-import"./style-gLCKlo5M.js";import"./navToggle-BDjXESUz.js";const o=document.getElementById("favorites-list"),a=document.getElementById("download-txt"),l=document.getElementById("download-json"),s=JSON.parse(localStorage.getItem("favorites"))||[];function d(){if(o){if(!s.length){o.innerHTML=`
+import"./style-QVFKXIIx.js";import"./navToggle-BDjXESUz.js";const o=document.getElementById("favorites-list"),a=document.getElementById("download-txt"),l=document.getElementById("download-json"),s=JSON.parse(localStorage.getItem("favorites"))||[];function d(){if(o){if(!s.length){o.innerHTML=`
       <p class="no-results">No favorites yet. Go back and add some!</p>
     `,a&&(a.style.display="none"),l&&(l.style.display="none");return}o.innerHTML="",s.forEach(e=>{const t=document.createElement("div");t.classList.add("favorite-card"),t.innerHTML=`
       <h3 class="fav-title">${e.title}</h3>
