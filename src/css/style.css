@@ -221,8 +221,8 @@ button:focus {
 .flip-card-back .small-muted {
   font-size: 0.8rem;
   color: var(--color-accent); /* o un color que contraste con el fondo oscuro */
-  margin-top: 0.5rem;
-  margin-bottom: 0.75rem; /* Espacio antes de los botones */
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem; /* Espacio antes de los botones */
 }
 
 /* Redefinir card-actions para el reverso */
@@ -384,9 +384,16 @@ footer {
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
   input[type="text"] { width: 100%; }
-  .book-card { min-height: 220px; }
+  .book-card { min-height: 340px; }
   #menu-toggle { display: block; }
-
+  .flip-card-front,
+  .flip-card-back {
+    padding: 0.5rem; /* Reducimos de 1rem a 0.75rem para ganar espacio */
+}
+.results-grid {
+    /* Permitir que las columnas sean más pequeñas en móvil, por ejemplo, 160px-180px */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+}
   .nav-menu {
     display: none;
     flex-direction: column;
